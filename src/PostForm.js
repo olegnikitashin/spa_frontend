@@ -45,7 +45,7 @@ export default class PostForm extends Component {
     .then(json)
     .then(response => {
       this.props.onPostSubmit(post);
-      this.setState(this.state = {username: '', title: '', body: ''})
+      this.setState({username: '', title: '', body: ''})
     })
     .catch(error => {
       console.log('Request failed', error);
