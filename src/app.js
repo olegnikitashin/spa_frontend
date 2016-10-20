@@ -20,7 +20,7 @@ export default class App extends Component {
       return response.json()
     }
 
-    fetch('http://localhost:3000/api/posts')
+    fetch('http://46.101.105.76/api/posts')
     .then(status)
     .then(json)
     .then(response => {

@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src",
-    "build": "webpack --progress --config webpack.production.config.js"
+    "build": "NODE_ENV=production webpack --config webpack.production.config.js --progress --profile --colors",
+    "deploy": "aws s3 cp public/ s3://spabackendon/ --recursive --region=us-east-1"
   },
   "devDependencies": {
     "babel-core": "^6.7.7",
