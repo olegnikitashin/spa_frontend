@@ -46,7 +46,7 @@ class App extends Component {
         <div>
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
-              <button type="button" className="btn btn-success navbar-btn" onClick={ this.props.PostActions }>Test!</button>
+              <button type="button" className="btn btn-success navbar-btn" onClick={ this.props.addPost }>Test!</button>
               <br />
               {this.state && this.state.posts.map(post => {
                 return (
