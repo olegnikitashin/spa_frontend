@@ -1,6 +1,4 @@
-import {
-  ADD_POST
-} from '../constants/Posts'
+import { ADD_POST } from '../constants/Posts'
 
 export function addPost() {
   return {

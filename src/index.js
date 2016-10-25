@@ -1,32 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore } from 'redux'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import App from './App';
 import configureStore from './store/configureStore'
+import App from './containers/App'
 
-const store = configureStore()
-
-function mapStateToProps (state) {
-  return {
-    user: state.user,
-    page: state.page
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    pageActions: bindActionCreators(pageActions, dispatch),
-    userActions: bindActionCreators(userActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps) (App)
-
+const preloadedState = window.__PRELOADED_STATE__
+const store = configureStore(preloadedState)
 
 ReactDOM.render(
   <Provider store={store}>
-  <App pollInterval={600000} />
+    <App pollInterval={60000} />
   </Provider>,
   document.getElementById('root')
-);
+)

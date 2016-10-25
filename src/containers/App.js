@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
-import Post from './Post';
-import PostForm from './PostForm';
-import 'whatwg-fetch'
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import Post from '../components/Post'
+import PostForm from '../components/PostForm'
+import * as PostActions from '../actions/PostActions'
+import 'whatwg-fetch'
 
-export default class App extends Component {
+
+class App extends Component {
 
   loadPostsFromServer() {
 
@@ -43,6 +46,8 @@ export default class App extends Component {
         <div>
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
+              <button type="button" className="btn btn-success navbar-btn" onClick={ this.props.PostActions }>Test!</button>
+              <br />
               {this.state && this.state.posts.map(post => {
                 return (
                   <Post key={post.id} id={post.id} title={post.title} username={post.username} body={post.body} />
@@ -56,3 +61,15 @@ export default class App extends Component {
     );
   }
 }
+
+//
+const mapStateToProps = (state) => ({
+  state
+})
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(PostActions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+//
