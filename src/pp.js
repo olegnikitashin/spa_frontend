@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Post from './Post';
 import PostForm from './PostForm';
 import 'whatwg-fetch'
-
+import { connect } from 'react-redux'
 
 export default class App extends Component {
 
