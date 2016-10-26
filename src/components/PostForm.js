@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 export default class PostForm extends Component {
   constructor(props){
     super(props)
-    this.state = {username: '', title: '', body: ''}
+
+    this.state = {
+      username: '',
+      title: '',
+      body: ''
+    };
   }
 
   handleUsernameChange(e) {
@@ -18,6 +23,9 @@ export default class PostForm extends Component {
     this.setState({body: e.target.value});
   }
 
+  handleTestClick() {
+    this.props.onTestClick(this.state)
+  }
 
   sendPost(post){
 
@@ -33,7 +41,7 @@ export default class PostForm extends Component {
       return response.json()
     }
 
-    fetch('http://46.101.105.76/api/posts', {
+    fetch(process.env.BACKEND_SERVER.trimRight('/') + '/api/posts', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -52,18 +60,17 @@ export default class PostForm extends Component {
     });
   }
 
-
   handleSubmit(e){
     e.preventDefault();
-    var username = this.state.username.trim();
-    var title = this.state.title.trim();
-    var body = this.state.body.trim();
+    let username = this.state.username.trim();
+    let title = this.state.title.trim();
+    let body = this.state.body.trim();
 
     if (!username || !title || !body) {
       return;
     }
 
-    var post = {
+    let post = {
       username: username,
       title: title,
       body: body
@@ -76,13 +83,13 @@ export default class PostForm extends Component {
     return (
       <div className="row">
         <div className="col-md-6 col-md-offset-3">
-          <form className="postForm" onSubmit={this.handleSubmit.bind(this)}>
+          <form className="postForm" onSubmit={::this.handleSubmit}>
             <div className="form-group">
               <input className="form-control"
                 type="text"
                 placeholder="Username"
                 value={this.state.username}
-                onChange={this.handleUsernameChange.bind(this)}
+                onChange={::this.handleUsernameChange}
               />
             </div>
             <div className="form-group">
@@ -90,7 +97,7 @@ export default class PostForm extends Component {
                 type="text"
                 placeholder="Title"
                 value={this.state.title}
-                onChange={this.handleTitleChange.bind(this)}
+                onChange={::this.handleTitleChange}
               />
             </div>
             <div className="form-group">
@@ -98,7 +105,7 @@ export default class PostForm extends Component {
                 type="text"
                 placeholder="Body"
                 value={this.state.body}
-                onChange={this.handleBodyChange.bind(this)}
+                onChange={::this.handleBodyChange}
               />
             </div>
             <input
@@ -106,6 +113,8 @@ export default class PostForm extends Component {
               className="btn btn-default"
               value="Add post"
             />
+            <button type="button" className="btn btn-success navbar-btn" onClick={::this.handleTestClick}>Test!</button>
+            <br />
           </form>
         </div>
       </div>

@@ -12,8 +12,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [new webpack.DefinePlugin({
-      'process.env':{
-        'NODE_ENV': JSON.stringify('production')
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+        'BACKEND_SERVER': JSON.stringify('http://46.101.105.76')
       }
     })],
   module: {

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src",
-    "build": "NODE_ENV=production webpack --config webpack.production.config.js --progress --profile --colors",
+    "build": "webpack --config webpack.production.config.js --progress --profile --colors",
     "deploy": "aws s3 cp public/ s3://spabackendon/ --recursive --region=us-east-1"
   },
   "devDependencies": {
@@ -15,6 +15,7 @@
     "babel-plugin-transform-runtime": "^6.7.5",
     "babel-preset-es2015": "^6.4.1",
     "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
     "eslint": "^2.9.0",
     "eslint-loader": "^1.3.0",
     "eslint-plugin-react": "^5.0.1",

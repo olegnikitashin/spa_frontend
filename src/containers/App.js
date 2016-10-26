@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import Post from './Post';
-import PostForm from './PostForm';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import Post from '../components/Post'
+import PostForm from '../components/PostForm'
+import * as PostActions from '../actions/PostActions'
 import 'whatwg-fetch'
 
-
-export default class App extends Component {
+class App extends Component {
 
   loadPostsFromServer() {
 
@@ -20,7 +22,7 @@ export default class App extends Component {
       return response.json()
     }
 
-    fetch('http://46.101.105.76/api/posts')
+    fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts')
     .then(status)
     .then(json)
     .then(response => {
@@ -38,6 +40,7 @@ export default class App extends Component {
   }
 
   render() {
+    const { addPost } = this.props.PostActions
     return (
       <div className="container">
         <div>
@@ -51,8 +54,22 @@ export default class App extends Component {
             </div>
           </div>
         </div>
-        <PostForm onPostSubmit={this.handlePostSubmit.bind(this)} />
+        <PostForm onPostSubmit={this.handlePostSubmit.bind(this)} onTestClick={addPost} />
       </div>
     );
   }
 }
+
+//
+const mapStateToProps = (state) => ({
+  posts: state.posts
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    PostActions: bindActionCreators(PostActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+//
