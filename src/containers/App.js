@@ -6,7 +6,6 @@ import PostForm from '../components/PostForm'
 import * as PostActions from '../actions/PostActions'
 import 'whatwg-fetch'
 
-
 class App extends Component {
 
   loadPostsFromServer() {
@@ -23,7 +22,7 @@ class App extends Component {
       return response.json()
     }
 
-    fetch('http://46.101.105.76/api/posts')
+    fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts')
     .then(status)
     .then(json)
     .then(response => {
@@ -41,13 +40,12 @@ class App extends Component {
   }
 
   render() {
+    const { addPost } = this.props.PostActions
     return (
       <div className="container">
         <div>
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
-              <button type="button" className="btn btn-success navbar-btn" onClick={this.addPost}>Test!</button>
-              <br />
               {this.state && this.state.posts.map(post => {
                 return (
                   <Post key={post.id} id={post.id} title={post.title} username={post.username} body={post.body} />
@@ -56,7 +54,7 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <PostForm onPostSubmit={this.handlePostSubmit.bind(this)} />
+        <PostForm onPostSubmit={this.handlePostSubmit.bind(this)} onTestClick={addPost} />
       </div>
     );
   }
@@ -64,7 +62,7 @@ class App extends Component {
 
 //
 const mapStateToProps = (state) => ({
-  state
+  posts: state.posts
 })
 
 function mapDispatchToProps(dispatch) {

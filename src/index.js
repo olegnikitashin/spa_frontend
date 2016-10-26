@@ -4,8 +4,7 @@ import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
 import App from './containers/App'
 
-const preloadedState = window.__PRELOADED_STATE__
-const store = configureStore(preloadedState)
+const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>

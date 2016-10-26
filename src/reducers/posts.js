@@ -1,11 +1,18 @@
-import { ADD_POST } from '../actions/PostActions'
+import { ADD_POST } from '../constants/Posts'
 
-export default function posts(state = [], action) {
+const initialState = {
+  id: 0,
+  title: '',
+  body: '',
+  username: ''
+}
+
+export default function post(state = initialState, action) {
 
   switch (action.type) {
     case ADD_POST:
-      return console.log('Hello Redux!');
-      return state;
+      console.log('Hello Redux!');
+      return {...state, post: action.payload}
 
     default:
       return state;
