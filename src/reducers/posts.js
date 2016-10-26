@@ -1,7 +1,7 @@
 import { ADD_POST } from '../constants/Posts'
 
 const initialState = {
-  id: 0,
+  id: null,
   title: '',
   body: '',
   username: ''
