@@ -46,7 +46,7 @@ class App extends Component {
         <div>
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
-              <button type="button" className="btn btn-success navbar-btn" onClick={ this.props.addPost }>Test!</button>
+              <button type="button" className="btn btn-success navbar-btn" onClick={this.addPost}>Test!</button>
               <br />
               {this.state && this.state.posts.map(post => {
                 return (
@@ -68,7 +68,9 @@ const mapStateToProps = (state) => ({
 })
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(PostActions, dispatch)
+  return {
+    PostActions: bindActionCreators(PostActions, dispatch)
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
