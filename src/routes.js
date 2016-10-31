@@ -7,8 +7,7 @@ import PostPage from './components/PostPage';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={PostsPage} />
-    <Route path="/posts" component={PostsPage}>
-      <Route path="/posts/:id" component={PostPage} />
-    </Route>
+    <Route path="posts" component={PostsPage} />
+    <Route path="/posts/:id" component={PostPage} />
   </Route>
 );

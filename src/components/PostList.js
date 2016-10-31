@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
-import * as PostActions from '../actions/postActions';
+import * as postActions from '../actions/postActions';
 import { bindActionCreators } from 'redux';
 
 class PostList extends React.Component {
@@ -15,12 +15,7 @@ class PostList extends React.Component {
     this.props.getPosts();
   }
 
-  // deletePost(event) {
-  //   this.props.deletePost(this.state.postItem.id)
-  // }
-
   handleDeletePost(id) {
-    console.log(id);
     this.props.deletePost(id);
   }
   //
@@ -39,7 +34,7 @@ class PostList extends React.Component {
             <div className="panel-footer">
               {postItem.username}
             </div>
-            <button onClick={() => this.handleDeletePost(postItem.id)}>
+            <button className="btn btn-danger btn-xs" onClick={() => this.handleDeletePost(postItem.id)}>
               Delete # {postItem.id}
             </button>
         </div>
@@ -59,17 +54,4 @@ PostList.propTypes = {
   getPosts: PropTypes.func.isRequired
 };
 
-// function mapStateToProps (state) {
-//   return {
-//     posts: state.posts
-//   };
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     postActions: bindActionCreators(PostActions, dispatch)
-//   };
-// }
-
 export default PostList;
-// export default connect(mapStateToProps, mapDispatchToProps)(PostList);

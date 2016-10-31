@@ -3,21 +3,21 @@ import * as types from './actionTypes';
 export function getPostsSuccess(posts) {
   return {
     type: types.GET_POSTS_SUCCESS,
-    posts: posts
+    posts
   };
 }
 
-export function addPostSucess(post) {
+export function addPostSuccess(post) {
   return {
     type: types.ADD_POST_SUCCESS,
-    post: post
+    post
   };
 }
 
 export function deletePostSuccess(id) {
   return {
     type: types.DELETE_POST_SUCCESS,
-    id: id
+    id
   };
 }
 
@@ -44,15 +44,14 @@ export function addPost(post) {
   return dispatch => {
     fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts', {
       method: 'POST',
-      header: {
+      headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(post)
-      // body: console.log(JSON.stringify(post))
     })
     .then(response => response.json())
-    .then(post => { dispatch(addPostSucess(post));
+    .then(post => { dispatch(addPostSuccess(post));
     }).catch(error => {
       throw(error);
     });
@@ -64,7 +63,6 @@ export function deletePost(id) {
     fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts/' + id, {
       method: 'DELETE'
     })
-    .then(response => response.json())
     .then(() => { dispatch(deletePostSuccess(id));
     }).catch(error => {
       throw(error);
@@ -72,11 +70,11 @@ export function deletePost(id) {
   };
 }
 
-export function showPost(post) {
+export function showPost(id) {
   return dispatch => {
-    fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts/' + post.id)
+    fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts/' + id)
     .then(response => response.json())
-    .then(post => { dispatch(deletePostSuccess(post));
+    .then(post => { dispatch(showPostSuccess(post));
     }).catch(error => {
       throw(error);
     });

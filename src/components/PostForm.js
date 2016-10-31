@@ -4,20 +4,20 @@ export default class PostForm extends Component {
 
   handleSubmit(e){
     e.preventDefault();
-    let username = this.refs.username.value.trim();
-    let title = this.refs.title.value.trim();
-    let body = this.refs.body.value.trim();
+    const username = this.refs.username.value.trim();
+    const title = this.refs.title.value.trim();
+    const body = this.refs.body.value.trim();
 
     if (!username || !title || !body) {
       return;
     }
 
-    let post = {
+    const post = {
       username: username,
       title: title,
       body: body
     };
-    // this.props.addPost({ username: username, title: title, body: body});
+
     this.props.addPost({post});
     this.refs.username.value = '';
     this.refs.title.value = '';
