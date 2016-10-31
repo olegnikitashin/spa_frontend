@@ -8,25 +8,26 @@ import 'whatwg-fetch';
 
 class PostsPage extends React.Component {
   render() {
-    const { posts } = this.props;
+    const { posts, post} = this.props;
     const { getPosts, deletePost, addPost } = this.props.PostActions;
     return(
       <div>
         <PostList posts={posts} getPosts={getPosts} deletePost={deletePost}/>
-        <PostForm addPost={addPost} />
+        <PostForm addPost={addPost} post={post}/>
       </div>
     );
   }
 }
 
 PostsPage.propTypes = {
+  post: PropTypes.object.isRequired,
   posts: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
   PostActions: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
-  return { posts: state.posts };
+  return { posts: state.posts, post: state.post };
 }
 
 function mapDispatchToProps(dispatch) {

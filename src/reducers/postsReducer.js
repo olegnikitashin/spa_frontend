@@ -17,7 +17,9 @@ export default function postReducer(state = initialState, action) {
     }
 
     case types.DELETE_POST_SUCCESS: {
-      const newPosts = state.posts.filter(post => post.id !== action.post.id);
+      // const newPosts = state.posts.filter(post => post.id !== action.id);
+      const newPosts = [].concat(state.posts.posts);
+      newPosts.splice(action.id, 1)
       return Object.assign({}, state, {
         posts: newPosts
       });

@@ -16,9 +16,9 @@ class PostList extends React.Component {
   }
 
   // deletePost(event) {
-  //   this.props.actions.deletePost(this.state.postItem.id)
+  //   this.props.deletePost(this.state.postItem.id)
   // }
-  //
+
   handleDeletePost(id) {
     console.log(id);
     this.props.deletePost(id);

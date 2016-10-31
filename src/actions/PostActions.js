@@ -10,14 +10,14 @@ export function getPostsSuccess(posts) {
 export function addPostSucess(post) {
   return {
     type: types.ADD_POST_SUCCESS,
-    post
+    post: post
   };
 }
 
-export function deletePostSuccess(post) {
+export function deletePostSuccess(id) {
   return {
     type: types.DELETE_POST_SUCCESS,
-    post
+    id: id
   };
 }
 
@@ -49,6 +49,7 @@ export function addPost(post) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(post)
+      // body: console.log(JSON.stringify(post))
     })
     .then(response => response.json())
     .then(post => { dispatch(addPostSucess(post));
@@ -58,13 +59,13 @@ export function addPost(post) {
   };
 }
 
-export function deletePost(post) {
+export function deletePost(id) {
   return dispatch => {
-    fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts/' + post.id, {
+    fetch(process.env.BACKEND_SERVER.trimRight('/')+ '/api/posts/' + id, {
       method: 'DELETE'
     })
     .then(response => response.json())
-    .then(post => { dispatch(showPostSuccess(post));
+    .then(() => { dispatch(deletePostSuccess(id));
     }).catch(error => {
       throw(error);
     });

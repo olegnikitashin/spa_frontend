@@ -17,7 +17,8 @@ export default class PostForm extends Component {
       title: title,
       body: body
     };
-    this.props.addPost(post);
+    // this.props.addPost({ username: username, title: title, body: body});
+    this.props.addPost({post});
     this.refs.username.value = '';
     this.refs.title.value = '';
     this.refs.body.value = '';
