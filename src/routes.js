@@ -1,13 +1,17 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from './containers/App';
 import PostsPage from './containers/PostsPage';
-import PostPage from './components/PostPage';
+import PostPage from './containers/PostPage';
+import NotFound from './components/NotFound';
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={PostsPage} />
-    <Route path="posts" component={PostsPage} />
-    <Route path="/posts/:id" component={PostPage} />
-  </Route>
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={PostsPage} />
+      <Route path="posts" component={PostsPage} />
+      <Route path="/posts/:id" component={PostPage} />
+    </Route>
+    <Route path="*" component={NotFound} />
+  </Router>
 );

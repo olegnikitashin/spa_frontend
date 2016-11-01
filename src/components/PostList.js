@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
-import * as postActions from '../actions/postActions';
+import * as postActions from '../actions/PostActions';
 import { bindActionCreators } from 'redux';
 
 class PostList extends React.Component {
