@@ -9,12 +9,12 @@ import 'whatwg-fetch';
 class PostsPage extends React.Component {
   render() {
     const { posts } = this.props;
-    const { getPosts, deletePost, addPost, disableBtn, enableBtn, disabled } = this.props.PostActions;
+    const { getPosts, deletePost, addPost } = this.props.PostActions;
     return(
       <div className="row">
         <div className="col-md-4 col-md-offset-4">
           <PostList posts={posts} getPosts={getPosts} deletePost={deletePost}/>
-          <PostForm addPost={addPost} disableBtn={disableBtn} enableBtn={enableBtn} disabled={disabled}/>
+          <PostForm addPost={addPost}/>
         </div>
       </div>
     );
@@ -29,7 +29,7 @@ PostsPage.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { posts: state.posts, disabled: state.postForm.disabled};
+  return { posts: state.posts};
 }
 
 function mapDispatchToProps(dispatch) {

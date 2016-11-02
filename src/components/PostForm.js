@@ -3,11 +3,11 @@ import React, { Component, PropTypes } from 'react';
 export default class PostForm extends Component {
   constructor(props) {
     super(props);
-    this.submitDisabled = this.submitDisabled.bind(this);
+    this.handleChangeInput = this.handleChangeInput.bind(this);
   }
 
   componentDidMount() {
-    this.props.disableBtn;
+    this._submit.disabled = true;
   }
 
   handleSubmit(e){
@@ -30,22 +30,14 @@ export default class PostForm extends Component {
     this.refs.username.value = '';
     this.refs.title.value = '';
     this.refs.body.value = '';
+    this._submit.disabled = true;
   }
 
-  submitDisabled() {
-    const username = this.refs.username.value.trim();
-    const title = this.refs.title.value.trim();
-    const body = this.refs.body.value.trim();
-    if (!username || !title || !body) {
-      this.props.disableBtn;
-    } else {
-      this.props.enableBtn;
-    }
+  handleChangeInput() {
+    this._submit.disabled = !(this.refs.username.value.trim() && this.refs.title.value.trim() && this.refs.body.value.trim());
   }
 
   render() {
-    const { disabled } = this.props;
-
     return (
       <div>
         <form className="postForm" onSubmit={(e) => this.handleSubmit(e)}>
@@ -54,7 +46,7 @@ export default class PostForm extends Component {
               type="text"
               placeholder="Username"
               ref="username"
-              onChange={this.submitDisabled}
+              onChange={this.handleChangeInput}
             />
           </div>
           <div className="form-group">
@@ -62,7 +54,7 @@ export default class PostForm extends Component {
               type="text"
               placeholder="Title"
               ref="title"
-              onChange={this.submitDisabled}
+              onChange={this.handleChangeInput}
             />
           </div>
           <div className="form-group">
@@ -70,20 +62,14 @@ export default class PostForm extends Component {
               type="text"
               placeholder="Body"
               ref="body"
-              onChange={this.submitDisabled}
+              onChange={this.handleChangeInput}
             />
           </div>
           <input
             type="submit"
             className="btn btn-default"
             value="Add post"
-            disabled={disabled}
-          />
-          <input
-            type="submit"
-            className="btn btn-default"
-            value="Add post"
-            disabled
+            ref={(ref) => this._submit = ref}
           />
         </form>
       </div>
