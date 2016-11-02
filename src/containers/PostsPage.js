@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as PostActions from '../actions/postActions';
+import * as PostActions from '../actions/PostActions';
 import PostList from '../components/PostList';
 import PostForm from '../components/PostForm';
 import 'whatwg-fetch';
@@ -11,9 +11,11 @@ class PostsPage extends React.Component {
     const { posts } = this.props;
     const { getPosts, deletePost, addPost } = this.props.PostActions;
     return(
-      <div>
-        <PostList posts={posts} getPosts={getPosts} deletePost={deletePost}/>
-        <PostForm addPost={addPost}/>
+      <div className="row">
+        <div className="col-md-4 col-md-offset-4">
+          <PostList posts={posts} getPosts={getPosts} deletePost={deletePost}/>
+          <PostForm addPost={addPost}/>
+        </div>
       </div>
     );
   }
@@ -27,7 +29,7 @@ PostsPage.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { posts: state.posts };
+  return { posts: state.posts};
 }
 
 function mapDispatchToProps(dispatch) {
